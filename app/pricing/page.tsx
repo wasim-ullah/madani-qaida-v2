@@ -79,6 +79,9 @@ export default function PricingPage() {
         <p className="text-lg text-indigo-700 max-w-md">
           Learn Quranic Arabic step-by-step with interactive lessons, audio, and progress tracking.
         </p>
+        <div className="inline-flex items-center gap-2 bg-yellow-100 border border-yellow-300 text-yellow-800 rounded-full px-5 py-2 text-sm font-bold shadow">
+          🎁 7-day free trial — no charge until day 8
+        </div>
       </div>
 
       {/* Plan cards */}
@@ -128,8 +131,11 @@ export default function PricingPage() {
                 }
                 disabled:opacity-60 disabled:cursor-not-allowed`}
             >
-              {loading === plan.key ? 'Redirecting…' : `Get ${plan.label}`}
+              {loading === plan.key ? 'Redirecting…' : 'Start Free Trial'}
             </button>
+            <p className={`text-center text-xs ${plan.highlight ? 'text-indigo-200' : 'text-indigo-400'}`}>
+              7 days free, then {plan.price}{plan.period}
+            </p>
           </div>
         ))}
       </div>
@@ -146,7 +152,7 @@ export default function PricingPage() {
       )}
 
       <p className="text-xs text-indigo-500 text-center">
-        Secure payment via Stripe · No hidden fees · Cancel any time from your account
+        Secure payment via Stripe · Cancel any time · No charge for 7 days
       </p>
     </main>
   );

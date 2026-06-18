@@ -46,6 +46,7 @@ export async function POST(req: NextRequest) {
     mode:       'subscription',
     line_items: [{ price: selectedPlan.priceId, quantity: 1 }],
     subscription_data: {
+      trial_period_days: 7,
       metadata: { clerkUserId: userId },
     },
     success_url: `${origin}/qaida?subscribed=1`,
