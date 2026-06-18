@@ -78,14 +78,14 @@ export default function PricingPage() {
       {/* Success banner */}
       {subscribed === '1' && (
         <div className="bg-green-100 border border-green-300 text-green-800 rounded-2xl px-6 py-3 text-sm font-medium">
-          🎉 Subscription active — welcome to Madani Qaida!
+          🎉 Subscription active — welcome to Qari!
         </div>
       )}
 
       {/* Header */}
       <div className="text-center space-y-3">
         <h1 className="text-4xl font-bold text-indigo-900 drop-shadow">
-          📖 Madani Qaida
+          📖 Qari
         </h1>
         <p className="text-lg text-indigo-700 max-w-md">
           Learn Quranic Arabic step-by-step with interactive lessons, audio, and progress tracking.

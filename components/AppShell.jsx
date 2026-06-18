@@ -91,9 +91,8 @@ export default function AppShell({ children }) {
               style={{ background: 'linear-gradient(135deg,#FFD54F,#FF8F00)', boxShadow: '0 4px 12px rgba(0,0,0,0.3)' }}>☪️</div>
             <div>
               <h1 className="font-extrabold text-white leading-tight" style={{ fontFamily: 'Fredoka One, cursive', fontSize: '20px' }}>
-                Madani Qaida
+                Qari
               </h1>
-              <p style={{ fontFamily:'IndoPak Nastaleeq,serif', color:'#FFD54F', fontSize:'15px', direction:'rtl' }}>مدنى قاعده</p>
             </div>
           </div>
 
@@ -155,7 +154,7 @@ export default function AppShell({ children }) {
               ⚙️ Admin Panel
             </button>
           )}
-          <p className="text-xs opacity-40 text-white" style={{ fontFamily:'Nunito, sans-serif' }}>Traditional Indo-Pak Madani Qaida Method</p>
+          <p className="text-xs opacity-40 text-white" style={{ fontFamily:'Nunito, sans-serif' }}>qari.co</p>
         </div>
       </aside>
 

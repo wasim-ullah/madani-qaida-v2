@@ -7,7 +7,7 @@ import { redirect } from 'next/navigation';
 import { auth, clerkClient } from '@clerk/nextjs/server';
 import Link from 'next/link';
 
-export const metadata = { title: 'Admin — Madani Qaida' };
+export const metadata = { title: 'Admin — Qari' };
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
   const { userId } = await auth();

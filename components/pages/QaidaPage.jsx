@@ -679,7 +679,7 @@ export default function QaidaPage() {
 
   return (
     <div className="sky-bg" style={{ minHeight:'100%' }}>
-      <PageHeader title="Madani Qaida" titleArabic="مدنى قاعده"
+      <PageHeader title="Qari"
         subtitle="Traditional Indo-Pak Method • 10 Levels" emoji="📖"
         gradient="linear-gradient(135deg,#1B4D6B 0%,#2979A0 100%)" />
 

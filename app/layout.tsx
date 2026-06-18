@@ -3,8 +3,8 @@ import { ClerkProvider } from '@clerk/nextjs';
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Madani Qaida — Arabic Learning for Kids",
-  description: "Traditional Indo-Pak Madani Qaida method for learning Arabic and Quran recitation",
+  title: "Qari — Arabic Learning for Kids",
+  description: "Learn Quranic Arabic step-by-step with interactive lessons, audio, and progress tracking.",
 };
 
 export const viewport: Viewport = {

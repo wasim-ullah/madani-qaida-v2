@@ -23,11 +23,7 @@ export default function SignUpPage() {
         <h1 style={{
           fontFamily: 'Fredoka One, cursive',
           fontSize: 28, color: 'white', margin: 0, lineHeight: 1.2,
-        }}>Madani Qaida</h1>
-        <p style={{
-          fontFamily: 'IndoPak Nastaleeq, serif',
-          color: '#FFD54F', fontSize: 18, direction: 'rtl', margin: '4px 0 0',
-        }}>مدنى قاعده</p>
+        }}>Qari</h1>
         <p style={{
           fontFamily: 'Fredoka One, cursive',
           color: 'rgba(255,255,255,0.7)', fontSize: 14, marginTop: 8,
