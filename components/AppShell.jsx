@@ -5,10 +5,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useProgress } from '@/hooks/useProgress';
 import { useAudio }    from '@/hooks/useAudio';
 import { useProfile }  from '@/hooks/useProfile';
-import { ProfileAvatar, ProfilePanel } from '@/components/ui/ProfilePanel';
+import { ProfilePanel } from '@/components/ui/ProfilePanel';
 import { TeacherModeToggle } from '@/components/ui/TeacherMark';
 import { TeacherDrawingOverlay } from '@/components/ui/TeacherDrawing';
 import { usePathname, useRouter } from 'next/navigation';
+import { UserButton, useUser } from '@clerk/nextjs';
 
 const NAV = [
   { id: 'qaida',    label: 'Qaida',    arabic: 'قاعده',  emoji: '📖', gradient: ['#1B4D6B','#2979A0'], href: '/qaida'    },
@@ -54,6 +55,8 @@ export default function AppShell({ children }) {
   const { progress }              = useProgress();
   const { unlockAudio, isSupported } = useAudio();
   const { profile }               = useProfile();
+  const { user }                  = useUser();
+  const role = user?.publicMetadata?.role ?? 'student';
 
   const activeNav = NAV.find(n => pathname?.startsWith(n.href)) ?? NAV[0];
 
@@ -103,19 +106,18 @@ export default function AppShell({ children }) {
             </div>
           </div>
 
-          <motion.button onClick={() => setShowProfile(true)} whileHover={{ scale:1.02 }} whileTap={{ scale:0.97 }}
-            className="mt-3 w-full flex items-center gap-3 px-3 py-2 rounded-2xl"
-            style={{ backgroundColor:'rgba(255,255,255,0.1)', border:'1.5px solid rgba(255,255,255,0.2)', cursor:'pointer' }}>
-            <ProfileAvatar size={36} />
-            <div className="flex-1 min-w-0 text-left">
+          <div className="mt-3 flex items-center gap-3 px-3 py-2 rounded-2xl"
+            style={{ backgroundColor:'rgba(255,255,255,0.1)', border:'1.5px solid rgba(255,255,255,0.2)' }}>
+            <UserButton afterSignOutUrl="/sign-in" />
+            <div className="flex-1 min-w-0">
               <div className="font-extrabold text-sm leading-tight text-white truncate" style={{ fontFamily:'Fredoka One, cursive' }}>
-                {profile.name || 'My Profile'}
+                {user?.firstName || user?.emailAddresses?.[0]?.emailAddress?.split('@')[0] || 'My Account'}
               </div>
-              <div className="text-xs opacity-50 text-white" style={{ fontFamily:'Nunito, sans-serif' }}>
-                {profile.name ? '✏️ Edit profile' : '👆 Tap to set up'}
+              <div className="text-xs opacity-50 text-white capitalize" style={{ fontFamily:'Nunito, sans-serif' }}>
+                {role} account
               </div>
             </div>
-          </motion.button>
+          </div>
         </div>
 
         <nav className="flex-1 py-4 px-3 flex flex-col gap-1 overflow-y-auto">
@@ -171,7 +173,7 @@ export default function AppShell({ children }) {
               <span style={{ fontSize:'15px' }}>⭐</span>
               <span style={{ color:'#FFD54F', fontFamily:'Fredoka One,cursive', fontSize:'15px', fontWeight:900 }}>{progress.totalStars}</span>
             </div>
-            <ProfileAvatar size={34} onClick={() => setShowProfile(true)} />
+            <UserButton afterSignOutUrl="/sign-in" />
           </div>
         </header>
 
