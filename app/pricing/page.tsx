@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useUser } from '@clerk/nextjs';
+import { useUser, useClerk } from '@clerk/nextjs';
 import { PlanKey } from '@/lib/stripe';
 
 const plans = [
@@ -27,6 +27,7 @@ const plans = [
 
 export default function PricingPage() {
   const { isSignedIn } = useUser();
+  const { signOut } = useClerk();
   const router = useRouter();
   const [loading, setLoading] = useState<PlanKey | 'portal' | null>(null);
 
@@ -164,6 +165,15 @@ export default function PricingPage() {
       <p className="text-xs text-indigo-500 text-center">
         Secure payment via Stripe · Cancel any time · No charge for 7 days
       </p>
+
+      {isSignedIn && (
+        <button
+          onClick={() => signOut(() => router.push('/sign-in'))}
+          className="text-xs text-slate-400 hover:text-slate-600 underline underline-offset-2 transition"
+        >
+          Sign out
+        </button>
+      )}
     </main>
   );
 }
