@@ -15,7 +15,12 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <ClerkProvider>
+    <ClerkProvider
+      signInUrl="/sign-in"
+      signUpUrl="/sign-up"
+      signInFallbackRedirectUrl="/qaida"
+      signUpFallbackRedirectUrl="/qaida"
+    >
       <html lang="en">
         <body>{children}</body>
       </html>

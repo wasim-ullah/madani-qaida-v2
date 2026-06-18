@@ -148,6 +148,13 @@ export default function AppShell({ children }) {
 
         <div className="px-5 py-4 border-t text-center" style={{ borderColor:'rgba(255,255,255,0.1)' }}>
           <div className="mb-2 flex justify-center"><TeacherModeToggle /></div>
+          {role === 'admin' && (
+            <button onClick={() => router.push('/admin')}
+              className="mb-2 w-full flex items-center justify-center gap-2 px-3 py-2 rounded-2xl text-xs font-bold transition"
+              style={{ backgroundColor:'rgba(139,92,246,0.25)', border:'1.5px solid rgba(139,92,246,0.5)', color:'#c4b5fd', fontFamily:'Fredoka One, cursive' }}>
+              ⚙️ Admin Panel
+            </button>
+          )}
           <p className="text-xs opacity-40 text-white" style={{ fontFamily:'Nunito, sans-serif' }}>Traditional Indo-Pak Madani Qaida Method</p>
         </div>
       </aside>
@@ -169,6 +176,13 @@ export default function AppShell({ children }) {
           </div>
           <div style={{ display:'flex', alignItems:'center', gap:8, position:'relative', zIndex:1 }}>
             <TeacherModeToggle compact />
+            {role === 'admin' && (
+              <button onClick={() => router.push('/admin')}
+                style={{ fontSize:'18px', background:'rgba(139,92,246,0.3)', border:'1.5px solid rgba(139,92,246,0.6)', borderRadius:10, padding:'4px 7px', cursor:'pointer', lineHeight:1 }}
+                title="Admin Panel">
+                ⚙️
+              </button>
+            )}
             <div style={{ display:'flex', alignItems:'center', gap:4, padding:'4px 8px', borderRadius:20, backgroundColor:'rgba(255,255,255,0.2)', border:'1.5px solid rgba(255,255,255,0.4)' }}>
               <span style={{ fontSize:'15px' }}>⭐</span>
               <span style={{ color:'#FFD54F', fontFamily:'Fredoka One,cursive', fontSize:'15px', fontWeight:900 }}>{progress.totalStars}</span>
