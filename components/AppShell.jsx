@@ -60,11 +60,7 @@ export default function AppShell({ children }) {
 
   const activeNav = NAV.find(n => pathname?.startsWith(n.href)) ?? NAV[0];
 
-  useEffect(() => {
-    if (!isSupported) return;
-    const t = setTimeout(() => setShowSoundBanner(true), 2000);
-    return () => clearTimeout(t);
-  }, [isSupported]);
+  // Sound banner removed — audio unlocks automatically on first tap via handleFirstTap
 
   const handleFirstTap = () => { unlockAudio(); setShowSoundBanner(false); };
 
