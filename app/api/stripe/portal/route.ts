@@ -20,10 +20,19 @@ export async function POST(req: NextRequest) {
 
   const origin = req.headers.get('origin') ?? process.env.NEXT_PUBLIC_APP_URL ?? 'https://qari.co';
 
-  const session = await stripe.billingPortal.sessions.create({
-    customer:   userRow.stripeCustomerId,
-    return_url: `${origin}/qaida`,
-  });
-
-  return NextResponse.json({ url: session.url });
+  try {
+    const session = await stripe.billingPortal.sessions.create({
+      customer:   userRow.stripeCustomerId,
+      return_url: `${origin}/qaida`,
+    });
+    return NextResponse.json({ url: session.url });
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : 'Unknown error';
+    // Stripe throws when the portal hasn't been configured in the dashboard
+    if (message.includes('configuration') || message.includes('portal')) {
+      return NextResponse.json({ error: 'Portal not configured' }, { status: 503 });
+    }
+    console.error('Portal error:', message);
+    return NextResponse.json({ error: message }, { status: 500 });
+  }
 }

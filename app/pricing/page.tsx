@@ -56,9 +56,19 @@ export default function PricingPage() {
     try {
       const res  = await fetch('/api/stripe/portal', { method: 'POST' });
       const data = await res.json();
-      if (data.url) { window.location.href = data.url; }
-      else { alert('Could not open billing portal. Please try again.'); setLoading(null); }
-    } catch { alert('Network error.'); setLoading(null); }
+      if (data.url) {
+        window.location.href = data.url;
+      } else if (res.status === 404) {
+        alert('No active subscription found on this account. Please subscribe first using the plans above.');
+        setLoading(null);
+      } else if (res.status === 503) {
+        alert('The billing portal is not yet enabled. Please contact support.');
+        setLoading(null);
+      } else {
+        alert(`Could not open billing portal: ${data.error ?? 'Unknown error'}`);
+        setLoading(null);
+      }
+    } catch { alert('Network error. Please try again.'); setLoading(null); }
   }
 
   return (
