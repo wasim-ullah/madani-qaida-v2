@@ -38,14 +38,17 @@ export async function POST(
   if (status === null) {
     // Clear override
     await db.delete(accessOverrides).where(eq(accessOverrides.userId, userId));
+  } else if (existing) {
+    // Row already exists — update it
+    await db
+      .update(accessOverrides)
+      .set({ overrideStatus: status, reason: reason ?? null, setByAdminId: adminId, updatedAt: new Date() })
+      .where(eq(accessOverrides.userId, userId));
   } else {
+    // No row yet — insert
     await db
       .insert(accessOverrides)
-      .values({ userId, overrideStatus: status, reason: reason ?? null, setByAdminId: adminId })
-      .onConflictDoUpdate({
-        target: accessOverrides.userId,
-        set: { overrideStatus: status, reason: reason ?? null, setByAdminId: adminId, updatedAt: new Date() },
-      });
+      .values({ userId, overrideStatus: status, reason: reason ?? null, setByAdminId: adminId });
   }
 
   // Write audit log
