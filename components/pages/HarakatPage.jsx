@@ -57,8 +57,8 @@ function LearnMode() {
       <h3 className="font-bold mb-3 text-center" style={{ color: '#1B4D6B', fontFamily: 'Nunito, sans-serif' }}>
         🎵 Choose a letter:
       </h3>
-      <div className="flex gap-2 flex-wrap justify-center mb-5">
-        {LETTERS.slice(0, 10).map(l => (
+      <div className="flex gap-2 flex-wrap justify-center mb-5" dir="rtl">
+        {LETTERS.map(l => (
           <button
             key={l.id}
             onClick={() => setActiveLetter(l)}
@@ -279,8 +279,8 @@ function BuildMode() {
 
       {/* Letter picker */}
       <h4 className="font-bold mb-2" style={{ color: '#1B4D6B', fontFamily: 'Nunito, sans-serif' }}>1. Choose a letter:</h4>
-      <div className="flex gap-2 flex-wrap mb-4">
-        {LETTERS.slice(0, 12).map(l => (
+      <div className="flex gap-2 flex-wrap mb-4" dir="rtl">
+        {LETTERS.map(l => (
           <button
             key={l.id}
             onClick={() => setSelectedLetter(l)}

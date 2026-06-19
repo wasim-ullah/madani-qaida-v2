@@ -65,55 +65,11 @@ function VerseView({ verse, activeWord, onWordClick }) {
         ))}
       </div>
 
-      {/* Transliteration */}
-      <p className="text-sm italic mb-1" style={{ color: '#64748B', fontFamily: 'Nunito, sans-serif' }}>
-        {verse.transliteration}
-      </p>
-
       {/* Translation */}
       <p className="text-sm font-bold" style={{ color: '#1B4D6B', fontFamily: 'Nunito, sans-serif' }}>
         {verse.translation}
       </p>
 
-      {/* Active word info */}
-      <AnimatePresence>
-        {activeWord && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="mt-3 rounded-xl p-3"
-            style={{ backgroundColor: '#FDF6E3', border: '1px solid #D4A017' }}
-          >
-            <div className="flex items-center gap-3">
-              <span style={{ fontFamily:'IndoPak Nastaleeq,serif', fontSize: '28px', color: '#1B4D6B' }}>
-                {activeWord.arabic}
-              </span>
-              <div>
-                <div className="text-sm italic" style={{ color: '#64748B', fontFamily: 'Nunito, sans-serif' }}>
-                  {activeWord.trans}
-                </div>
-                <div className="text-sm font-bold" style={{ color: '#1B4D6B', fontFamily: 'Nunito, sans-serif' }}>
-                  {activeWord.meaning}
-                </div>
-              </div>
-              {activeWord.tajweed && activeWord.tajweed.length > 0 && (
-                <div className="ml-auto flex gap-1">
-                  {activeWord.tajweed.map(t => (
-                    <span
-                      key={t}
-                      className="text-xs px-2 py-0.5 rounded-full font-bold capitalize"
-                      style={{ backgroundColor: TAJWEED_COLORS[t] + '20', color: TAJWEED_COLORS[t], fontFamily: 'Nunito, sans-serif' }}
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              )}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   );
 }
@@ -230,6 +186,39 @@ export default function QuranPage() {
               onWordClick={handleWordClick}
             />
           ))}
+
+          {/* Active word panel — sticky at bottom */}
+          <AnimatePresence>
+            {activeWord && (
+              <motion.div
+                initial={{ opacity:0, y:20 }} animate={{ opacity:1, y:0 }} exit={{ opacity:0, y:20 }}
+                className="sticky bottom-0 rounded-2xl p-4 mt-2"
+                style={{ backgroundColor:'#1B4D6B', border:'2px solid #D4A017', zIndex:10 }}
+              >
+                <div className="flex items-center gap-3">
+                  <span style={{ fontFamily:'IndoPak Nastaleeq,serif', fontSize:'32px', color:'#FFD54F' }}>
+                    {activeWord.arabic}
+                  </span>
+                  <div className="flex-1">
+                    <div className="font-bold text-white" style={{ fontFamily:'Fredoka One,cursive' }}>
+                      {activeWord.meaning}
+                    </div>
+                  </div>
+                  {activeWord.tajweed?.length > 0 && (
+                    <div className="flex gap-1 flex-wrap">
+                      {activeWord.tajweed.map(t => (
+                        <span key={t} className="text-xs px-2 py-0.5 rounded-full font-bold capitalize"
+                          style={{ backgroundColor: TAJWEED_COLORS[t]+'30', color: TAJWEED_COLORS[t] }}>
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                  <button onClick={() => setActiveWord(null)} style={{ color:'rgba(255,255,255,0.5)', fontSize:18, background:'none', border:'none', cursor:'pointer' }}>✕</button>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           <div className="rounded-2xl p-4 mt-2" style={{ backgroundColor: '#F0FDF4', border: '2px solid #22C55E' }}>
             <p className="text-center text-sm font-bold" style={{ color: '#166534', fontFamily: 'Nunito, sans-serif' }}>

@@ -36,7 +36,7 @@ function BrowseMode({ filter }) {
             }}
           >
             {/* Main row */}
-            <div className="flex items-center gap-3 p-4">
+            <div className="flex items-center gap-3 p-4" dir="rtl">
               <div className="text-3xl shrink-0">{word.icon}</div>
               <div className="flex-1">
                 <div className="flex items-center justify-between">
@@ -114,7 +114,10 @@ function BrowseMode({ filter }) {
 
 function MatchGame() {
   const { speak } = useAudio();
-  const gameWords = WORDS.slice(0, 6);
+  const gameWords = useMemo(() => {
+    const shuffled = [...WORDS].sort(() => Math.random() - 0.5);
+    return shuffled.slice(0, 6);
+  }, []);
   const [matched, setMatched] = useState([]);
   const [selectedArabic, setSelectedArabic] = useState(null);
   const [selectedMeaning, setSelectedMeaning] = useState(null);

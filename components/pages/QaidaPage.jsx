@@ -118,7 +118,7 @@ function LessonHarakat({ onComplete, isTanwin }) {
   const harakatList = isTanwin
     ? HARAKAT.filter(h => h.id.startsWith('tanwin'))
     : HARAKAT.filter(h => ['zabar','zer','pesh'].includes(h.id));
-  const practiceLetters = LETTERS.slice(0,8);
+  const practiceLetters = LETTERS;
   const [activeLetter, setActiveLetter] = useState(practiceLetters[0]);
 
   const colorGuide = [
@@ -179,7 +179,7 @@ function LessonHarakat({ onComplete, isTanwin }) {
         <h3 className="font-extrabold mb-2" style={{ color:'#1B4D6B', fontFamily:'Fredoka One,cursive' }}>
           👉 Pick a letter to practice:
         </h3>
-        <div className="flex gap-2 flex-wrap">
+        <div className="flex gap-2 flex-wrap" dir="rtl">
           {practiceLetters.map(l => (
             <button key={l.id} onClick={() => setActiveLetter(l)}
               className="px-3 py-2 rounded-xl text-2xl transition-all bubble-btn"
@@ -487,8 +487,8 @@ function LessonForms({ onComplete }) {
         Arabic letters change shape depending on where they appear in a word. Tap to hear each form!
       </TipBox>
 
-      <div className="flex gap-2 flex-wrap justify-center">
-        {LETTERS.slice(0,12).map(l => (
+      <div className="flex gap-2 flex-wrap" dir="rtl" style={{ justifyContent:'flex-end' }}>
+        {LETTERS.map(l => (
           <button key={l.id} onClick={() => setSel(l)}
             className="rounded-xl px-3 py-2 transition-all bubble-btn"
             style={{
@@ -667,9 +667,11 @@ export default function QaidaPage() {
         <CelebrationModal show={showCelebration} stars={earnedStars}
           lessonTitle={activeLesson.title} onContinue={() => {
             setShowCelebration(false);
-            const currentIndex = QAIDA_LESSONS.findIndex(l => l.id === activeLesson.id);
-            const nextLesson = QAIDA_LESSONS[currentIndex + 1];
-            setActiveLesson(nextLesson || null);
+            setActiveLesson(prev => {
+              const currentIndex = QAIDA_LESSONS.findIndex(l => l.id === prev.id);
+              const nextLesson = QAIDA_LESSONS[currentIndex + 1];
+              return nextLesson || null;
+            });
           }} />
       </div>
     );

@@ -100,14 +100,11 @@ function LetterFlipCard({ letter }) {
             <LetterIllustration letter={letter} size={52} />
           </div>
 
-          <div className="text-center">
-            <div className="font-extrabold text-sm" style={{ color: c.body, fontFamily:'Fredoka One,cursive' }}>
-              {letter.name}
-            </div>
-            <motion.div className="text-base"
+          <div className="text-center" style={{ marginTop: 4 }}>
+            <motion.span style={{ fontSize: '22px', display: 'inline-block' }}
               animate={{ scale:[1,1.3,1] }} transition={{ duration:1.5, repeat:Infinity, repeatDelay:2 }}>
               🔊
-            </motion.div>
+            </motion.span>
           </div>
         </div>
 
