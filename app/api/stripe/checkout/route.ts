@@ -39,7 +39,7 @@ export async function POST(req: NextRequest) {
       .where(eq(users.id, userId));
   }
 
-  const origin = req.headers.get('origin') ?? process.env.NEXT_PUBLIC_APP_URL ?? 'https://qari.co';
+  const origin = req.headers.get('origin') ?? process.env.NEXT_PUBLIC_APP_URL ?? 'https://app.qari.co';
 
   const session = await stripe.checkout.sessions.create({
     customer:   customerId,

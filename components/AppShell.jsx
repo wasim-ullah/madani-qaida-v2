@@ -150,7 +150,7 @@ export default function AppShell({ children }) {
               ⚙️ Admin Panel
             </button>
           )}
-          <p className="text-xs opacity-40 text-white" style={{ fontFamily:'Nunito, sans-serif' }}>qari.co</p>
+          <p className="text-xs opacity-40 text-white" style={{ fontFamily:'Nunito, sans-serif' }}>app.qari.co</p>
         </div>
       </aside>
 

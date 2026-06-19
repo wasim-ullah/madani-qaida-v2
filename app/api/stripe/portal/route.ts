@@ -18,7 +18,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'No subscription found' }, { status: 404 });
   }
 
-  const origin = req.headers.get('origin') ?? process.env.NEXT_PUBLIC_APP_URL ?? 'https://qari.co';
+  const origin = req.headers.get('origin') ?? process.env.NEXT_PUBLIC_APP_URL ?? 'https://app.qari.co';
 
   try {
     const session = await stripe.billingPortal.sessions.create({
